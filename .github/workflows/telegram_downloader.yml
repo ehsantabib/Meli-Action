@@ -1,10 +1,10 @@
-name: تلگرام دانلودر (حذف اتمی قبل از checkout)
+name: telegram downloader
 
 on:
   workflow_dispatch:
     inputs:
       telegram_links:
-        description: '🔗 لینک‌های تلگرام (حداکثر ۲۰ عدد، جدا با کاما، فاصله یا خط جدید)'
+        description: '🔗 لینک‌های تلگرام (حداکثر 1000 عدد، جدا با کاما، فاصله یا خط جدید)'
         required: true
         type: string
       split_threshold_mb:
@@ -148,9 +148,9 @@ jobs:
                   if l not in seen:
                       seen.add(l)
                       unique_links.append(l)
-              if len(unique_links) > 20:
-                  print(f"⚠️ بیش از ۲۰ لینک تشخیص داده شد. فقط ۲۰ لینک اول پردازش می‌شود.")
-                  unique_links = unique_links[:20]
+              if len(unique_links) > 1000:
+                  print(f"⚠️ بیش از 1000 لینک تشخیص داده شد. فقط 1000 لینک اول پردازش می‌شود.")
+                  unique_links = unique_links[:1000]
               print(f"✅ {len(unique_links)} لینک معتبر شناسایی شد.")
               return unique_links
 
